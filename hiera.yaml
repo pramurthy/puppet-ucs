@@ -1,0 +1,10 @@
+---
+version: 4
+datadir: data
+hierarchy:
+  - name: "Trusted Certname"
+    backend: yaml
+    path: "nodes/%{::trusted.certname}"
+
+  - name: "common"
+    backend: yaml

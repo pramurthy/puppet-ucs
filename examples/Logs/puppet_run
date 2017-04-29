@@ -1,0 +1,52 @@
+root@switch_a#puppet agent -t
+Info: Using configured environment 'production'
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Info: Loading facts
+Info: Caching catalog for switch_a
+Info: Applying configuration version '1493370226'
+Notice: /Stage[main]/Ucs::Switch_config::Enable_features/Cisco_command_config[Enable_req_features_on__switch]/command: command changed '' to 'feature udld
+feature lacp
+feature vpc
+feature interface-vlan
+'
+Notice: /Stage[main]/Ucs::Switch_config::Stp_global_parameters/Cisco_stp_global[default]/bpdufilter: bpdufilter changed 'false' to 'true'
+Notice: /Stage[main]/Ucs::Switch_config::Stp_global_parameters/Cisco_stp_global[default]/bpduguard: bpduguard changed 'false' to 'true'
+Notice: /Stage[main]/Ucs::Switch_config::Stp_global_parameters/Cisco_command_config[Enable_port_type_network_default]/command: command changed '' to 'spanning-tree port type network default
+'
+Notice: /Stage[main]/Ucs::Switch_config::Vlan/Cisco_vlan[603]/ensure: created
+Notice: /Stage[main]/Ucs::Switch_config::Vlan/Cisco_vlan[604]/ensure: created
+Notice: /Stage[main]/Ucs::Switch_config::Peer_links/Cisco_interface[Ethernet1/9]/description: description changed '' to 'VPC Peer Docker-N9K-B:e1/10'
+Notice: /Stage[main]/Ucs::Switch_config::Peer_links/Cisco_interface[Ethernet1/9]/shutdown: shutdown changed 'true' to 'false'
+Notice: /Stage[main]/Ucs::Switch_config::Peer_links/Cisco_interface[Ethernet1/10]/description: description changed '' to 'VPC Peer Docker-N9K-B:e1/9'
+Notice: /Stage[main]/Ucs::Switch_config::Peer_links/Cisco_interface[Ethernet1/10]/shutdown: shutdown changed 'true' to 'false'
+Notice: /Stage[main]/Ucs::Switch_config::Vpc_domain/Cisco_vpc_domain[10]/ensure: created
+Notice: /Stage[main]/Ucs::Switch_config::Vpc_domain/Cisco_command_config[10]/command: command changed '' to 'vpc domain 10
+ip arp synchronize
+peer-switch
+'
+Notice: /Stage[main]/Ucs::Switch_config::Host_interface/Cisco_interface[Ethernet1/11]/description: description changed '' to 'Member of portchannel 12'
+Notice: /Stage[main]/Ucs::Switch_config::Host_interface/Cisco_interface[Ethernet1/12]/description: description changed '' to 'Member of portchannel 13'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Cisco_interface_channel_group[Ethernet1/9]/channel_group: channel_group changed 'false' to '11'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Cisco_interface_channel_group[Ethernet1/10]/channel_group: channel_group changed 'false' to '11'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Cisco_interface_channel_group[Ethernet1/11]/channel_group: channel_group changed 'false' to '12'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Cisco_interface_channel_group[Ethernet1/12]/channel_group: channel_group changed 'false' to '13'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel11]/Cisco_interface[port-channel11]/description: description changed '' to 'description of peer link'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel11]/Cisco_interface[port-channel11]/switchport_mode: switchport_mode changed 'access' to 'trunk'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel11]/Cisco_interface[port-channel11]/switchport_trunk_native_vlan: switchport_trunk_native_vlan changed '1' to '603'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel11]/Cisco_interface[port-channel11]/vpc_peer_link: vpc_peer_link changed 'false' to 'true'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel11]/Cisco_interface[port-channel11]/stp_port_type: stp_port_type changed 'false' to 'network'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel12]/Cisco_interface[port-channel12]/description: description changed '' to 'Docker-FI-A'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel12]/Cisco_interface[port-channel12]/switchport_mode: switchport_mode changed 'access' to 'trunk'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel12]/Cisco_interface[port-channel12]/switchport_trunk_native_vlan: switchport_trunk_native_vlan changed '1' to '603'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel12]/Cisco_interface[port-channel12]/vpc_id: vpc_id changed 'false' to '12'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel12]/Cisco_interface[port-channel12]/stp_guard: stp_guard changed 'false' to 'root'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel12]/Cisco_interface[port-channel12]/stp_port_type: stp_port_type changed 'false' to 'edge trunk'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel13]/Cisco_interface[port-channel13]/description: description changed '' to 'Docker-FI-B'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel13]/Cisco_interface[port-channel13]/switchport_mode: switchport_mode changed 'access' to 'trunk'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel13]/Cisco_interface[port-channel13]/switchport_trunk_native_vlan: switchport_trunk_native_vlan changed '1' to '603'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel13]/Cisco_interface[port-channel13]/vpc_id: vpc_id changed 'false' to '13'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel13]/Cisco_interface[port-channel13]/stp_guard: stp_guard changed 'false' to 'root'
+Notice: /Stage[main]/Ucs::Switch_config::Portchannel/Ucs::Switch_config::Interface_portchannel[port-channel13]/Cisco_interface[port-channel13]/stp_port_type: stp_port_type changed 'false' to 'edge trunk'
+Notice: Applied catalog in 198.31 seconds
+root@switch_a#

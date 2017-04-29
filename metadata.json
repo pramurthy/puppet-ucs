@@ -1,0 +1,15 @@
+{
+  "name": "puppet-ucs",
+  "version": "0.1.0",
+  "author": "puppet",
+  "summary": "Does configurations related to UCS",
+  "license": "Apache-2.0",
+  "source": "https://github.com/pramurthy/puppet-ucs",
+  "project_page": "https://github.com/pramurthy/puppet-ucs",
+  "issues_url": "https://github.com/pramurthy/puppet-ucs",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+

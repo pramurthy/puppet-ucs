@@ -1,0 +1,67 @@
+---
+#proxy data
+ucs::switch_config::install_prerequisite_puppet_modules::proxy: "http://proxy.esl.cisco.com:8080"
+
+# data related to vpc domain configuration
+ucs::switch_config::vpc_domain::vpc_domain_id: 10
+ucs::switch_config::vpc_domain::peer_gateway: true
+ucs::switch_config::vpc_domain::peer_keepalive_dest: "10.65.121.55"
+ucs::switch_config::vpc_domain::peer_keepalive_src: "10.65.121.54"
+ucs::switch_config::vpc_domain::role_priority: 10
+ucs::switch_config::vpc_domain::delay_restore: 240
+
+#peerlinks configuration data
+ucs::switch_config::peer_links::interface_list:
+  - interface_name: "Ethernet1/9"
+    description: "VPC Peer Docker-N9K-B:e1/10"
+  - interface_name: "Ethernet1/10"
+    description: "VPC Peer Docker-N9K-B:e1/9"
+
+# list of vlans to be created
+ucs::switch_config::vlan::vlan_list: ["603","604"]
+
+# data related to portchannel creation and its mapping to physical interfaces
+ucs::switch_config::portchannel::create_portchannels_list:
+  - interface_name: "port-channel11"
+    description: "description of peer link"
+    switchport_mode: "trunk"
+    switchport_trunk_native_vlan: 603
+    vpc_peer_link: true
+    stp_port_type: "network"
+
+  - interface_name: "port-channel12"
+    description: "Docker-FI-A"
+    switchport_mode: "trunk"
+    switchport_trunk_native_vlan: 603
+    vpc_id: 12
+    stp_port_type: "edge trunk"
+    stp_guard: "root"
+
+  - interface_name: "port-channel13"
+    description: "Docker-FI-B"
+    switchport_mode: "trunk"
+    switchport_trunk_native_vlan: 603
+    vpc_id: 13
+    stp_port_type: "edge trunk"
+    stp_guard: "root"
+
+ucs::switch_config::portchannel::channelgroup_to_physicalinterface_mappings_list:
+  - channelgroup_name: "port-channel11"
+    channelgroup_id: 11
+    array_of_physical_interfaces:
+      - "Ethernet1/9"
+      - "Ethernet1/10"
+  - channelgroup_name: "port-channel12"
+    channelgroup_id: 12
+    array_of_physical_interfaces:
+      - "Ethernet1/11"
+  - channelgroup_name: "port-channel13"
+    channelgroup_id: 13
+    array_of_physical_interfaces:
+      - "Ethernet1/12"
+
+ucs::switch_config::host_interface::interface_list:
+  - name: "Ethernet1/11"
+    description: "Member of portchannel 12"
+  - name: "Ethernet1/12"
+    description: "Member of portchannel 13"
