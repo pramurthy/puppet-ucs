@@ -1,4 +1,10 @@
-class ucs::docker::install_docker_engine{
+class ucs::docker::install_docker_engine(
+    $version=1.12,
+    $docker_public_key="https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
+    ){
+
+    $os_version=$facts['os']['release']['major']
+
     package { "epel-release":
         ensure   => absent,
     }
@@ -18,12 +24,12 @@ class ucs::docker::install_docker_engine{
     }
 
     exec { 'Docker-public-key':
-       command     => 'rpm --import "https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"',
+       command     => "rpm --import ${docker_public_key}",
        path        => ['/usr/bin', '/usr/sbin']
     }
 
     yumrepo { "dockerrepo":
-        baseurl => "https://packages.docker.com/1.13/yum/repo/main/centos/7",
+        baseurl => "https://packages.docker.com/${version}/yum/repo/main/centos/${os_version}",
         descr => "Docker Repo",
         enabled => 1,
         gpgcheck => 0,
