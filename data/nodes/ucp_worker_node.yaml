@@ -1,0 +1,4 @@
+
+ucs::docker::install_docker_engine::version: "latest"
+
+ucs::docker::set_node_role::ucp_worker_node::ucp_controller_node: "node-1"

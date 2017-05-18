@@ -1,0 +1,6 @@
+
+ucs::docker::install_docker_engine::version: "latest"
+
+ucs::docker::set_node_role::ucp_controller_node::username: "admin"
+ucs::docker::set_node_role::ucp_controller_node::password: "admin"
+ucs::docker::set_node_role::ucp_controller_node::user_access_port: "19002"
