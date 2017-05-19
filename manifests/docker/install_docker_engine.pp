@@ -4,7 +4,7 @@ class ucs::docker::install_docker_engine(
  ){
 
     $os_version=$facts['os']['release']['major']
-    $tcp_fw_ports=[80,443,2375,2376,2377,4789,7946,12376,12379,12380,12381,12382,12383,12384,12385,12386,12387,19002]
+    $tcp_fw_ports=[80,443,2375,2376,2377,4789,7946,12376,12379,12380,12381,12382,12383,12384,12385,12386,12387,19002,8443]
     $udp_fw_ports=[4789,7946]
 
     package { 'ntp':
@@ -25,7 +25,6 @@ class ucs::docker::install_docker_engine(
           protocol => 'tcp',
           }
     } 
-
 
     $udp_fw_ports.each |Integer $uport| {
       firewalld_port {"Open uport ${uport} in the public Zone":
