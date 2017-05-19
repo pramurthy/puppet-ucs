@@ -43,7 +43,14 @@
 # Copyright 2017 Your name here, unless otherwise noted.
 #
 class ucs {
+
    include ucs::docker::install_docker_engine
+   include ucs::docker::set_node_role::ucp_controller_node
+   include ucs::docker::set_node_role::ucp_controller_replica_node
+   include ucs::docker::set_node_role::ucp_dtr_node
+   include ucs::docker::set_node_role::ucp_dtr_replica_node   
+   include ucs::docker::set_node_role::ucp_worker_node
+
    include ucs::switch_config::install_prerequisite_puppet_modules
    include ucs::switch_config::enable_features
    include ucs::switch_config::stp_global_parameters
