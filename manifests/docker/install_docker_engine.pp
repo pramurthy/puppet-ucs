@@ -7,6 +7,16 @@ class ucs::docker::install_docker_engine(
     $tcp_fw_ports=[80,443,2375,2376,2377,4789,7946,12376,12379,12380,12381,12382,12383,12384,12385,12386,12387,19002]
     $udp_fw_ports=[4789,7946]
 
+    package { 'ntp':
+        ensure          => installed,
+    }
+
+    service { "apache2":
+        ensure  => running,
+        enable => true,
+        start   => "systemctl start ntpd.service",
+    }
+
     $tcp_fw_ports.each |Integer $tport| {
       firewalld_port {"Open tport ${tport} in the public Zone":
           ensure => 'present',
