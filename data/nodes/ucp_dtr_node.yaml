@@ -1,7 +1,4 @@
-ucs::docker::install_docker_engine::version: "latest"
-
-ucs::docker::set_node_role::ucp_dtr_node::ucp_controller_node_ip: '10.11.0.39'
+ucs::docker::set_node_role::ucp_dtr_node::ucp_controller_node_ip: '10.11.0.69'
 ucs::docker::set_node_role::ucp_dtr_node::ucp_controller_node_user: 'admin'
 ucs::docker::set_node_role::ucp_dtr_node::ucp_controller_node_pass: 'maplelabs'
 ucs::docker::set_node_role::ucp_dtr_node::ucp_controller_node_port: '19002'
-

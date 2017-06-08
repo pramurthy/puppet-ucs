@@ -1,5 +1,5 @@
 class ucs::docker::set_node_role::ucp_dtr_node(
-    $ucp_controller_node_ip='10.11.0.39',
+    $ucp_controller_node_ip='10.11.0.69',
     $ucp_controller_node_user='admin',
     $ucp_controller_node_pass='maplelabs',
     $ucp_controller_node_port='19002',
@@ -7,7 +7,7 @@ class ucs::docker::set_node_role::ucp_dtr_node(
 
     $dtr_node_ip=$facts['networking']['ip']
     $dtr_node_hostname=$facts['networking']['hostname']
-    docker_ucp::dtr {'Dtr install':
+    docker_ddc::dtr {'Dtr install':
       install => true,
       dtr_version => 'latest',
       dtr_external_url => "https://${dtr_node_ip}",
