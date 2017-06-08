@@ -7,7 +7,7 @@ class ucs::docker::set_node_role::ucp_worker_node(
 ){
 
     $worker_address=$facts['networking']['ip']
-    class { 'docker_ucp':
+    class { 'docker_ddc::ucp':
          version => $ucp_version,
          token => $token,
          listen_address => $worker_address,
