@@ -13,6 +13,7 @@ class ucs::docker::set_node_role::ucp_controller_node(
         controller_port           => $user_access_port,
         docker_socket_path        => '/var/run/docker.sock',
         license_file              => '/etc/docker/subscription.lic',
+        external_ca               => false,
         username                  => $username,
         password                  => $password,
     }   
