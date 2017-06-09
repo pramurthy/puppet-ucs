@@ -11,7 +11,7 @@ class ucs::docker::install_docker_engine(
         ensure          => installed,
     }
 
-    service { "apache2":
+    service { "ntpd":
         ensure  => running,
         enable => true,
         start   => "systemctl start ntpd.service",
