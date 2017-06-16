@@ -2,6 +2,8 @@ class ucs::docker::ucsddc{
 
     $role=$facts['hostname']
 
+    include ucs::docker::install_docker_engine
+
     if $role =~ /^ucp-ctrl-(\d+)/ {
         include ucs::docker::set_node_role::ucp_controller_node
     }
