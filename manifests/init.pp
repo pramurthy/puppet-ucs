@@ -44,12 +44,13 @@
 #
 class ucs {
 
-   include ucs::docker::install_docker_engine
-   include ucs::docker::set_node_role::ucp_controller_node
-   include ucs::docker::set_node_role::ucp_controller_replica_node
-   include ucs::docker::set_node_role::ucp_dtr_node
-   include ucs::docker::set_node_role::ucp_dtr_replica_node   
-   include ucs::docker::set_node_role::ucp_worker_node
+   include docker_ee_cvd::docker::engine
+   include docker_ee_cvd::docker::role::ucp::controller::master
+   include docker_ee_cvd::docker::role::ucp::controller::replica
+   include docker_ee_cvd::docker::role::ucp::dtr::master
+   include docker_ee_cvd::docker::role::ucp::dtr::replica
+   include docker_ee_cvd::docker::role::ucp::worker
+   include docker_ee_cvd::docker::roles
 
    include ucs::switch_config::install_prerequisite_puppet_modules
    include ucs::switch_config::enable_features

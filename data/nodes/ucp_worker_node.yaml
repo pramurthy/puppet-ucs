@@ -1,4 +1,4 @@
-ucs::docker::set_node_role::ucp_worker_node::ucp_version: '2.1.4'
-ucs::docker::set_node_role::ucp_worker_node::ucp_controller_node: '10.11.0.69'
-ucs::docker::set_node_role::ucp_worker_node::ucp_controller_port: '19002'
-ucs::docker::set_node_role::ucp_worker_node::token: 'SWMTKN-1-0c3txh59nhpbe611o036xia2jfldsz6bib7ef1thfi9a97rshf-3uekr3vn2vid9q954xmd0pg84'
+docker_ee_cvd::docker::role::ucp::worker::ucp_version: '2.1.4'
+docker_ee_cvd::docker::role::ucp::worker::ucp_controller_node: '10.11.0.69'
+docker_ee_cvd::docker::role::ucp::worker::ucp_controller_port: '19002'
+docker_ee_cvd::docker::role::ucp::worker::token: 'SWMTKN-1-0c3txh59nhpbe611o036xia2jfldsz6bib7ef1thfi9a97rshf-3uekr3vn2vid9q954xmd0pg84'
