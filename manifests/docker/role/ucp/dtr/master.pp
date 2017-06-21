@@ -6,7 +6,7 @@ class docker_ee_cvd::docker::role::ucp::dtr::master(
 ){
 
   $dtr_node_ip       = $facts['networking']['ip']
-  $dtr_node_hostname = $facts['networking']['hostname']
+  $dtr_node_hostname = $facts['networking']['fqdn']
 
   docker_ddc::dtr { 'Dtr install':
     install          => true,

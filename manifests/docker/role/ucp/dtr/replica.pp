@@ -6,7 +6,7 @@ class docker_ee_cvd::docker::role::ucp::dtr::replica(
   $existing_replica_id      = 'c96ccdbd5220',
 ){
 
-  $dtr_node_hostname = $facts['networking']['hostname']
+  $dtr_node_hostname = $facts['networking']['fqdn']
 
   docker_ddc::dtr { 'Dtr install':
     join                    => true,
