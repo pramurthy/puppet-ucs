@@ -1,4 +1,4 @@
-class docker_ee_cvd::docker::role::ucp::controller(
+class docker_ee_cvd::docker::role::ucp::controller::replica(
   $ucp_version         = '2.1.4',
   $ucp_controller_node = '10.11.0.69',
   $ucp_controller_port = '19002',
