@@ -42,6 +42,14 @@ class docker_ee_cvd::docker::engine(
     #
     include '::ntp'
 
+    package { 'firewalld': ensure => installed }
+
+    service { "firewalld":
+      ensure => running,
+      enable => true,
+      start  => "systemctl start firewalld.service",
+      }
+
     $tcp_fw_ports.each |Integer $tport| {
       firewalld_port { "Open tport ${tport} in the public Zone":
         ensure   => 'present',
@@ -60,22 +68,29 @@ class docker_ee_cvd::docker::engine(
         }
     }
 
+    file { '/etc/zones': source => '/etc/firewalld/zones/public.xml' }
+
     exec { 'firewalld-restart':
-       command     => 'service firewalld restart',
-       path        => ['/usr/bin', '/usr/sbin']
+      command     => 'service firewalld restart',
+      path        => ['/usr/bin', '/usr/sbin'],
+      subscribe   => File['/etc/zones'],
+      refreshonly => true,
     }
 
-
+    #Working on this will remove once fixed
+    #
     exec { 'Docker-public-key':
-       command     => "rpm --import ${docker_public_key}",
-       path        => ['/usr/bin', '/usr/sbin']
+      command => "rpm --import ${docker_public_key}",
+      path    => ['/usr/bin', '/usr/sbin']
     }
 
+    #Working on this will remove once fixed
+    #
     yumrepo { "dockerrepo":
-        baseurl => "https://packages.docker.com/${version}/yum/repo/main/centos/${os_version}",
-        descr => "Docker Repo",
-        enabled => 1,
-        gpgcheck => 0,
+      baseurl  => "https://packages.docker.com/${version}/yum/repo/main/centos/${os_version}",
+      descr    => "Docker Repo",
+      enabled  => 1,
+      gpgcheck => 0,
     }
 
     class { 'docker':

@@ -6,6 +6,8 @@ class docker_ee_cvd::docker::role::ucp::worker(
 ){
 
   $worker_address = $facts['networking']['ip']
+  # Working on this will remove once fixed
+  #
   $fingerprint    = "echo -n | openssl s_client -connect ${$ucp_controller_node}:${ucp_controller_port} 2> /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | openssl x509 -noout     -fingerprint -sha256"
 
   class { 'docker_ddc::ucp':
