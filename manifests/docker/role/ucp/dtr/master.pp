@@ -1,8 +1,8 @@
 class docker_ee_cvd::docker::role::ucp::dtr::master(
-  $ucp_controller_node_ip   = '10.11.0.69',
-  $ucp_controller_node_user = 'admin',
-  $ucp_controller_node_pass = 'maplelabs',
-  $ucp_controller_node_port = '19002',
+  $ucp_controller_node_ip   = undef,
+  $ucp_controller_node_user = $docker_ddc::params::ucp_username,
+  $ucp_controller_node_pass = $docker_ddc::params::ucp_password,
+  $ucp_controller_node_port = $docker_ddc::params::controller_port,
 ){
 
   $dtr_node_ip       = $facts['networking']['ip']

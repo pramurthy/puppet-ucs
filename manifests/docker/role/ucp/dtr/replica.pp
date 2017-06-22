@@ -1,9 +1,9 @@
 class docker_ee_cvd::docker::role::ucp::dtr::replica(
-  $ucp_controller_node_ip   = '10.11.0.69',
-  $ucp_controller_node_user = 'admin',
-  $ucp_controller_node_pass = 'maplelabs',
-  $ucp_controller_node_port = '19002',
-  $existing_replica_id      = 'c96ccdbd5220',
+  $ucp_controller_node_ip   = undef,
+  $ucp_controller_node_user = $docker_ddc::params::version,
+  $ucp_controller_node_pass = $docker_ddc::params::ucp_password,
+  $ucp_controller_node_port = $docker_ddc::params::controller_port,
+  $existing_replica_id      = undef,
 ){
 
   $dtr_node_hostname = $facts['networking']['fqdn']

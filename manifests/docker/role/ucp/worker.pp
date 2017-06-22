@@ -1,8 +1,8 @@
 class docker_ee_cvd::docker::role::ucp::worker(
-  $ucp_version         = '2.1.4',
-  $ucp_controller_node = '10.11.0.69',
-  $ucp_controller_port = '19002',
-  $token               = 'SWMTKN-1-0c3txh59nhpbe611o036xia2jfldsz6bib7ef1thfi9a97rshf-3uekr3vn2vid9q954xmd0pg84',
+  $ucp_version         = $docker_ddc::params::version,
+  $ucp_controller_node = undef,
+  $ucp_controller_port = $docker_ddc::params::controller_port,
+  $token               = $docker_ddc::params::token,
 ){
 
   $worker_address = $facts['networking']['ip']
