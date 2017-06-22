@@ -50,7 +50,6 @@ class ucs {
    include docker_ee_cvd::docker::role::ucp::dtr::master
    include docker_ee_cvd::docker::role::ucp::dtr::replica
    include docker_ee_cvd::docker::role::ucp::worker
-   include docker_ee_cvd::docker::roles
 
    include ucs::switch_config::install_prerequisite_puppet_modules
    include ucs::switch_config::enable_features
