@@ -42,13 +42,7 @@ class docker_ee_cvd::docker::engine(
     #
     include '::ntp'
 
-    package { 'firewalld': ensure => installed }
-
-    service { "firewalld":
-      ensure => running,
-      enable => true,
-      start  => "systemctl start firewalld.service",
-      }
+    class { 'firewalld': }
 
     $tcp_fw_ports.each |Integer $tport| {
       firewalld_port { "Open tport ${tport} in the public Zone":
@@ -66,15 +60,6 @@ class docker_ee_cvd::docker::engine(
         port     => "${uport}",
         protocol => 'udp',
         }
-    }
-
-    file { '/etc/zones': source => '/etc/firewalld/zones/public.xml' }
-
-    exec { 'firewalld-restart':
-      command     => 'service firewalld restart',
-      path        => ['/usr/bin', '/usr/sbin'],
-      subscribe   => File['/etc/zones'],
-      refreshonly => true,
     }
 
     #Working on this will remove once fixed
