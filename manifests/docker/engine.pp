@@ -1,8 +1,7 @@
 class docker_ee_cvd::docker::engine(
-  # Docker UCP is a containerized application that requires Docker CS Engine 1.13.0 or above to run
-  #
-  $version           = 1.13,
-  $docker_public_key = "https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
+  package_cs_source_location => 'https://storebits.docker.com/ee/centos/sub-4ad5c2c8-5962-49d2-bb65-93aa9249c3d8/7/x86_64/stable-17.03/',
+  package_cs_key_source      => 'https://storebits.docker.com/ee/centos/sub-4ad5c2c8-5962-49d2-bb65-93aa9249c3d8/gpg',
+  package_repos              => 'stable-17.03',
  ){
 
     $os_version   = $facts['os']['release']['major']
@@ -61,25 +60,15 @@ class docker_ee_cvd::docker::engine(
         protocol => 'udp',
         }
     }
-
-    #Working on this will remove once fixed
-    #
-    exec { 'Docker-public-key':
-      command => "rpm --import ${docker_public_key}",
-      path    => ['/usr/bin', '/usr/sbin']
-    }
-
-    #Working on this will remove once fixed
-    #
-    yumrepo { "dockerrepo":
-      baseurl  => "https://packages.docker.com/${version}/yum/repo/main/centos/${os_version}",
-      descr    => "Docker Repo",
-      enabled  => 1,
-      gpgcheck => 0,
-    }
-
     class { 'docker':
-      docker_cs      => true,
-      storage_driver => 'devicemapper'
+      docker_cs                  => true,
+      package_name               => 'docker-ee',
+      package_cs_source_location => $package_cs_source_location,
+      package_cs_key_source      => $package_cs_key_source,
+      package_repos              => $package_repos,
+      tcp_bind                   => 'tcp://127.0.0.1:4243',
+      socket_bind                => 'unix:///var/run/docker.sock',
+      repo_opt                   => '',
     }
+   
 }
