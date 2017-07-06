@@ -1,4 +1,4 @@
-docker_ee_cvd::docker::role::ucp::controller::master::version: "2,1,4"
+docker_ee_cvd::docker::role::ucp::controller::master::version: "2.1.4"
 docker_ee_cvd::docker::role::ucp::controller::master::username: "admin"
 docker_ee_cvd::docker::role::ucp::controller::master::password: "admin"
 docker_ee_cvd::docker::role::ucp::controller::master::user_access_port: "19002"
