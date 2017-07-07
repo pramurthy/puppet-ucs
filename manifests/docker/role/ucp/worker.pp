@@ -1,10 +1,10 @@
 class docker_ee_cvd::docker::role::ucp::worker(
-  $ucp_version         = $docker_ddc::params::version,
+  $ucp_version         = $docker_ee_cvd::docker::params::version,
   $ucp_controller_node = undef,
-  $ucp_controller_port = $docker_ddc::params::controller_port,
-  $token               = $docker_ddc::params::token,
-  $fingerprint         = $docker_ddc::params::fingerprint
-){
+  $ucp_controller_port = $docker_ee_cvd::docker::params::controller_port,
+  $token               = $docker_ee_cvd::docker::params::token,
+  $fingerprint         = $docker_ee_cvd::docker::params::fingerprint
+) inherits docker_ee_cvd::docker::params {
 
   $worker_address = $facts['networking']['ip']
 
