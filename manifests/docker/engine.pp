@@ -1,9 +1,8 @@
-class docker_ee_cvd::docker::engine(
-  $package_cs_source_location = 'https://storebits.docker.com/ee/centos/sub-4ad5c2c8-5962-49d2-bb65-93aa9249c3d8/7/x86_64/stable-17.03/',
-  $package_cs_key_source      = 'https://storebits.docker.com/ee/centos/sub-4ad5c2c8-5962-49d2-bb65-93aa9249c3d8/gpg',
-  $package_repos              = 'stable-17.03',
+define docker_ee_cvd::docker::engine(
+  $package_source_location,
+  $package_key_source,
+  $package_repos = $title,
  ){
-
     $os_version   = $facts['os']['release']['major']
 
     # Docker Datacenter requires some TCP and UDP ports to be opened
@@ -63,8 +62,8 @@ class docker_ee_cvd::docker::engine(
     class { 'docker':
       docker_cs                  => true,
       package_name               => 'docker-ee',
-      package_cs_source_location => $package_cs_source_location,
-      package_cs_key_source      => $package_cs_key_source,
+      package_cs_source_location => $package_source_location,
+      package_cs_key_source      => $package_key_source,
       package_repos              => $package_repos,
       tcp_bind                   => 'tcp://127.0.0.1:4243',
       socket_bind                => 'unix:///var/run/docker.sock',
