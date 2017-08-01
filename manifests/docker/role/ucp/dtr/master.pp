@@ -21,11 +21,15 @@ class docker_ee_cvd::docker::role::ucp::dtr::master(
   $ucp_controller_port = puppetdb_query($ucp_controller_port_query)[0]['value']
 
 
-  Docker_ee_cvd::Docker::Engine <<| tag == "${ucp_controller_node}" |>>
-
   class { 'docker_ee_cvd::docker::role::ucp::worker':
     ucp_controller_node => $ucp_controller_node,
     require             => Class['docker'],
+  }
+
+  exec { 'DTR sleep time':
+    command => 'sleep 90',
+    path    => ['/usr/bin', '/usr/sbin',],
+    require => Class['docker_ee_cvd::docker::role::ucp::worker'],
   }
 
   docker_ddc::dtr { 'Dtr install':
@@ -37,7 +41,7 @@ class docker_ee_cvd::docker::role::ucp::dtr::master(
     ucp_password     => $ucp_password,
     ucp_insecure_tls => true,
     dtr_ucp_url      => "https://${ucp_ipaddress}:${ucp_controller_port}",
-    require          => Class['docker_ee_cvd::docker::role::ucp::worker'],
+    require          => Exec['DTR sleep time'],
     }
 }
 

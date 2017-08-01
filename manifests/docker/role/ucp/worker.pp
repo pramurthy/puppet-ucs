@@ -33,6 +33,7 @@ class docker_ee_cvd::docker::role::ucp::worker(
   }"
   $ucp_version = puppetdb_query($ucp_version_query)[0]['value']
 
+  Docker_ee_cvd::Docker::Engine <<| tag == "${ucp_controller_node}" |>>
 
   class { 'docker_ddc::ucp':
     version           => $ucp_version,
@@ -42,5 +43,6 @@ class docker_ee_cvd::docker::role::ucp::worker(
     fingerprint       => $ucp_fingerprint,
     ucp_manager       => $ucp_ipaddress,
     ucp_url           => 'https://${$ucp_ipaddress}:$ucp_controller_port',
+    require           => Class['docker'],
     }
 }

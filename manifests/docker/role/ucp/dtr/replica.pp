@@ -32,12 +32,17 @@ class docker_ee_cvd::docker::role::ucp::dtr::replica(
   $dtr_replica_id = puppetdb_query($dtr_replica_id_query)[0]['value']
   $dtr_version = puppetdb_query($dtr_version_query)[0]['value']
 
-  Docker_ee_cvd::Docker::Engine <<| tag == "${ucp_controller_node}" |>>
 
   class { 'docker_ee_cvd::docker::role::ucp::worker':
     ucp_controller_node => $ucp_controller_node,
     require             => Class['docker'],
   }
+
+  exec { 'DTR sleep time':
+    command => 'sleep 90',
+    path    => ['/usr/bin', '/usr/sbin',],
+    require => Class['docker_ee_cvd::docker::role::ucp::worker'],
+  } 
 
   docker_ddc::dtr { 'Dtr install':
     join                    => true,
@@ -48,7 +53,7 @@ class docker_ee_cvd::docker::role::ucp::dtr::replica(
     ucp_insecure_tls        => true,
     dtr_existing_replica_id => $dtr_replica_id,
     dtr_ucp_url             => "https://${ucp_ipaddress}:${ucp_controller_port}",
-    require                 => Class['docker_ee_cvd::docker::role::ucp::worker'],
+    require                 => Exec['DTR sleep time'],
   }
 
 }
