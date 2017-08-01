@@ -11,7 +11,7 @@ class docker_ee_cvd::docker::role::ucp::controller::master(
   $package_repos           = $docker_ee_cvd::docker::params::package_repos,
 ) inherits docker_ee_cvd::docker::params {
 
-  $controller_ip = $facts['networking']['ip']
+  $controller_ip       = $facts['networking']['ip']
   $ucp_controller_node = $facts['networking']['fqdn']
 
   @@docker_ee_cvd::docker::engine { "${package_repos}" :

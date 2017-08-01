@@ -1,8 +1,8 @@
 class docker_ee_cvd::docker::role::ucp::dtr::replica(
-  $ucp_dtr_node             = undef,
-  $ucp_controller_node      = undef,
-  $ucp_username            = $docker_ee_cvd::docker::params::ucp_username,
-  $ucp_password            = $docker_ee_cvd::docker::params::ucp_password,
+  $ucp_dtr_node        = undef,
+  $ucp_controller_node = undef,
+  $ucp_username        = $docker_ee_cvd::docker::params::ucp_username,
+  $ucp_password        = $docker_ee_cvd::docker::params::ucp_password,
 ) inherits docker_ee_cvd::docker::params {
 
   $ucp_ipaddress_query = "facts {
@@ -25,12 +25,12 @@ class docker_ee_cvd::docker::role::ucp::dtr::replica(
     }
   }"
 
-  $dtr_node_ip       = $facts['networking']['ip']
-  $dtr_node_hostname = $facts['networking']['fqdn']
-  $ucp_ipaddress = puppetdb_query($ucp_ipaddress_query)[0]['value']
+  $dtr_node_ip         = $facts['networking']['ip']
+  $dtr_node_hostname   = $facts['networking']['fqdn']
+  $ucp_ipaddress       = puppetdb_query($ucp_ipaddress_query)[0]['value']
   $ucp_controller_port = puppetdb_query($ucp_controller_port_query)[0]['value']
-  $dtr_replica_id = puppetdb_query($dtr_replica_id_query)[0]['value']
-  $dtr_version = puppetdb_query($dtr_version_query)[0]['value']
+  $dtr_replica_id      = puppetdb_query($dtr_replica_id_query)[0]['value']
+  $dtr_version         = puppetdb_query($dtr_version_query)[0]['value']
 
 
   class { 'docker_ee_cvd::docker::role::ucp::worker':

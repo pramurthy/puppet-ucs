@@ -6,8 +6,8 @@ class docker_ee_cvd::docker::role::ucp::dtr::master(
 ) inherits docker_ee_cvd::docker::params {
 
 
-  $dtr_node_ip       = $facts['networking']['ip']
-  $dtr_node_hostname = $facts['networking']['fqdn']
+  $dtr_node_ip         = $facts['networking']['ip']
+  $dtr_node_hostname   = $facts['networking']['fqdn']
   $ucp_ipaddress_query = "facts {
     name = \"ipaddress\" and certname = \"${ucp_controller_node}\" and certname in resources[certname] {
     }
