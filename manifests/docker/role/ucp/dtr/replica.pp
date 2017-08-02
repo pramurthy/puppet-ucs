@@ -1,30 +1,32 @@
 class docker_ee_cvd::docker::role::ucp::dtr::replica(
-  $ucp_dtr_node        = undef,
-  $ucp_controller_node = undef,
   $ucp_username        = $docker_ee_cvd::docker::params::ucp_username,
   $ucp_password        = $docker_ee_cvd::docker::params::ucp_password,
 ) inherits docker_ee_cvd::docker::params {
 
-  $ucp_ipaddress_query = "facts {
-    name = \"ipaddress\" and certname = \"${ucp_controller_node}\" and certname in resources[certname] {
+  $ucp_ipaddress_query= 'facts {
+    name = "ipaddress" and certname in resources[certname] {
+     type = "Class" and title = "Docker_ee_cvd::Docker::Role::Ucp::Controller::Master" 
     }
-  }"
-
-  $ucp_controller_port_query= "facts {
-    name = \"ucp_controller_port\"  and certname = \"${ucp_controller_node}\" and certname in resources[certname] {
+  }'
+  
+  $ucp_controller_port_query = 'facts {
+    name = "ucp_controller_port" and certname in resources[certname] {
+     type = "Class" and title = "Docker_ee_cvd::Docker::Role::Ucp::Controller::Master" 
     }
-  }"
+  }'
 
-  $dtr_replica_id_query = "facts {
-    name = \"dtr_replica_id\" and certname = \"${ucp_dtr_node}\" and certname in resources[certname] {
+  $dtr_replica_id_query = 'facts {
+    name = "dtr_replica_id" and certname in resources[certname] {
+     type = "Class" and title = "Docker_ee_cvd::Docker::Role::Ucp::Dtr::Master" 
     }
-  }"
-
-  $dtr_version_query= "facts {
-    name = \"dtr_version\"  and certname = \"${ucp_dtr_node}\" and certname in resources[certname] {
+  }'
+  
+  $dtr_version_query= 'facts {
+    name = "dtr_version" and certname in resources[certname] {
+     type = "Class" and title = "Docker_ee_cvd::Docker::Role::Ucp::Dtr::Master" 
     }
-  }"
-
+  }'
+  
   $dtr_node_ip         = $facts['networking']['ip']
   $dtr_node_hostname   = $facts['networking']['fqdn']
   $ucp_ipaddress       = puppetdb_query($ucp_ipaddress_query)[0]['value']
@@ -34,7 +36,6 @@ class docker_ee_cvd::docker::role::ucp::dtr::replica(
 
 
   class { 'docker_ee_cvd::docker::role::ucp::worker':
-    ucp_controller_node => $ucp_controller_node,
     require             => Class['docker'],
   }
 

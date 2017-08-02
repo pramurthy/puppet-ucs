@@ -33,6 +33,6 @@ class docker_ee_cvd::docker::role::ucp::controller::master(
     username           => $ucp_username,
     password           => $ucp_password,
     require            => Class['docker'],
+    local_client       => $docker_ee_cvd::docker::params::local_client,
   }
-
 }

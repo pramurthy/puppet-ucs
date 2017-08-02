@@ -10,4 +10,6 @@ class docker_ee_cvd::docker::params inherits docker_ddc::params {
     $package_source_location = 'https://storebits.docker.com/ee/centos/sub-4ad5c2c8-5962-49d2-bb65-93aa9249c3d8/7/x86_64/stable-17.03/'
     $package_key_source      = 'https://storebits.docker.com/ee/centos/sub-4ad5c2c8-5962-49d2-bb65-93aa9249c3d8/gpg'
     $package_repos           = 'stable-17.03'
+    #it's a temporary fix
+    $local_client            = true
 }
