@@ -56,5 +56,6 @@ class docker_ee_cvd::docker::role::ucp::worker(
     ucp_manager       => $ucp_ipaddress,
     ucp_url           => 'https://${$ucp_ipaddress}:$ucp_controller_port',
     require           => Class['docker'],
+    local_client      => $docker_ee_cvd::docker::params::local_client,
     }
 }
